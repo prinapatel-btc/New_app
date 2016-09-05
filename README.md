@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# New_app
+Programmatic Bookshelf
+>>>>>>> 710dd8e8b516bdae9840ff2dbd88da17a9f9a786
