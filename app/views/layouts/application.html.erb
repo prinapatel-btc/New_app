@@ -10,17 +10,43 @@
 
   <body class="<%= controller.controller_name %>">
     <div id="banner">
+      <%= form_tag store_path, class: 'locale' do %>
+      <p>
+        <%= link_to_unless I18n.locale == :en, "English", locale: :en %>
+        <%= link_to_unless I18n.locale == :es, "Espa&ntilde;ol", locale: :es %>
+      </p>
+      <% end %>
       <%= image_tag("logo.png") %>
-      <%= @page_title || "Pragmatic Bookshelf"%>
+      <%= @page_title || t('.title') %>
     </div>
     <div id="columns">
       <div id="side">
+        <div id="cart">
+        <%if @cart%>
+        <%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+          <%= render @cart rescue nil %>
+          <% end %>
+        <%end%>
+        </div>
+        <h3><%= Time.now%></h3>
         <ul>
-        <li><a href="http://www....">Home</a></li>
-        <li><a href="http://www..../faq">Questions</a></li>
-        <li><a href="http://www..../news">News</a></li>
-        <li><a href="http://www..../contact">Contact</a></li>
+        <li><a href="http://www...."><%= t('.home') %></a></li>
+        <li><a href="http://www..../faq"><%= t('.questions') %></a></li>
+        <li><a href="http://www..../news"><%= t('.news') %></a></li>
+        <li><a href="http://www..../contact"><%= t('.contact') %></a></li>
         </ul>
+
+        <% if session[:user_id] %>
+          <%= button_to 'Logout', logout_path, method: :delete %>
+        <% else %>
+          <ul>
+          
+          <% unless current_page?(login_path) %>
+            <li><a href= <%= login_path %> style="color: white"><%= t('.login') %></a></li>
+          <% end %>
+          
+          </ul>
+        <% end %>
       </div>
     </div> 
     <div id="main">
