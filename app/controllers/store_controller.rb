@@ -7,6 +7,5 @@ class StoreController < ApplicationController
     
       @products = Product.order(:title)
       @count = increment_count
-
   end
 end
